@@ -1,0 +1,54 @@
+1) Create a view to select staffid,name,salary and gender of hospital staff who have gender M
+
+mysql> create view Hospitalstaff_temp
+    -> as select StaffID, Firstname, Salary, Gender
+    -> from Hospital_staff
+    -> where Gender='M';
+Query OK, 0 rows affected (0.08 sec)
+
+2) Display all records of a view.
+
+mysql> Select * from Hospitalstaff_temp;
++---------+-----------+--------+--------+
+| StaffID | Firstname | Salary | Gender |
++---------+-----------+--------+--------+
+|       1 | Rahul     |  35000 | M      |
+|       2 | Mehul     |  45000 | M      |
+|       4 | Rakesh    |  25000 | M      |
+|       5 | Yash      |  35000 | M      |
++---------+-----------+--------+--------+
+4 rows in set (0.00 sec)
+
+3) Delete the view.
+
+mysql> Drop view Hospitalstaff_temp;
+Query OK, 0 rows affected (0.00 sec)
+
+4)Creating user and Granting privileges to user.
+
+mysql> create database hospital;
+Query OK, 0 rows affected (0.03 sec)
+mysql> grant usage on *.* to your_user@localhost identified by 'vodafone2510';
+Query OK, 0 rows affected, 1 warning (0.06 sec)
+
+mysql> SELECT User FROM mysql.user;
++-----------+
+| User      |
++-----------+
+| mysql.sys |
+| root      |
+| your_user |
++-----------+
+3 rows in set (0.00 sec)
+
+mysql> grant all privileges on hospital.* to your_user@localhost ;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP ON hospital.*
+    ->     TO your_user@localhost ;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> REVOKE ALL PRIVILEGES, GRANT OPTION FROM your_user@localhost ;
+Query OK, 0 rows affected (0.03 sec)
+
+

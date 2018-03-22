@@ -1,0 +1,122 @@
+
+1.Find Hospital staff who have salary greater than or equal to that of each Hospital staff who have gender M.
+
+mysql> select Firstname
+    -> from Hospital_staff
+    -> where Salary>=all ( select Salary
+    ->     from Hospital_staff
+    ->     where Gender='M');
++-----------+
+| Firstname |
++-----------+
+| Mehul     |
++-----------+
+1 row in set (0.05 sec)
+
+
+2.Find Hospital staff who have salary greater than or equal to that of atleast one Hospital staff who have gender M.
+
+mysql> select Firstname
+    -> from Hospital_staff
+    -> where Salary>=some ( select Salary
+    ->      from Hospital_staff
+    ->      where Gender='M');
++-----------+
+| Firstname |
++-----------+
+| Rahul     |
+| Mehul     |
+| Saniya    |
+| Rakesh    |
+| Yash      |
+| Deepali   |
+| Anushka   |
++-----------+
+7 rows in set (0.03 sec)
+
+
+3.Find Hospital staff who appear in the list of Doctors using EXISTS.
+
+mysql> select Firstname
+    -> from Hospital_staff
+    -> where exists ( select *
+    -> from Doctor
+    -> where Doctor.StaffID=Hospital_staff.StaffID);
++-----------+
+| Firstname |
++-----------+
+| Rahul     |
+| Mehul     |
+| Saniya    |
+| Rakesh    |
+| Yash      |
++-----------+
+12 rows in set (0.00 sec)
+
+
+4.Find Hospital staff who do not appear in the list of Doctors using NOT EXISTS
+
+mysql> select Firstname
+    -> from Hospital_staff
+    -> where not exists ( select *
+    -> from Doctor
+    -> where Doctor.StaffID=Hospital_staff.StaffID);
++-----------+
+| Firstname |
++-----------+     |
+| Deepali   |
+| Simran    |
+| Anushka   |
+| Shruti    |
+| Aditi     |
+| Soumya    |
+| Khushi    |
++-----------+
+12 rows in set (0.00 sec)
+
+5. Find the names of Patients who have TestID=12
+mysql> Select fname
+    ->    from Patient
+    ->    where pID IN ( select Patient_id
+    -> from Test
+    -> where TestID=12 AND Patient_id=pID);
++--------+
+| fname  |
++--------+
+| Anant  |
++--------+
+1 row in set (0.00 sec)
+
+6. Find the names of Patients who DO NOT HAVE have TestID=12
+
+mysql> Select fname
+    ->    from Patient
+    ->    where pID NOT IN ( select Patient_id
+    -> from Test
+    -> where TestID=12 AND Patient_id=pID);
++--------+
+| fname  |
++--------+
+| Rohan  |
+| Varun  |
+| Dhruv  |
+| Kumpal |
++--------+
+4 rows in set (0.00 sec)
+
+7) create a backup for Hospital_staff table by copying all records to a new table hospi_bkp.
+mysql>  create table hospi_bkp
+    ->     (StaffID int(10) primary key,
+    ->     Firstname varchar(10),
+    ->     Lastname varchar(10),
+    ->     Qualification varchar(10),
+    ->     Gender char(1),
+    ->     Salary float(10)
+    ->     );
+mysql> insert into hospi_bkp
+    -> select * from Hospital_staff;
+Query OK, 12 rows affected (0.06 sec)
+Records: 12  Duplicates: 0  Warnings: 0
+
+		
+

@@ -1,0 +1,157 @@
+1.Retrieve Hospital staff names in union with Doctor type by eliminating duplicates
+
+mysql> SELECT Firstname FROM Hospital_Staff
+    -> UNION
+    -> SELECT DoctorType FROM Doctor;
++-------------+
+| Firstname   |
++-------------+
+| Rahul       |
+| Mehul       |
+| Saniya      |
+| Rakesh      |
+| Yash        |
+| Deepali     |
+| Simran      |
+| Anushka     |
+| Shruti      |
+| Aditi       |
+| Soumya      |
+| Khushi      |
+| Residential |
+| Consultant  |
+| Trainee     |
++-------------+
+15 rows in set (0.06 sec)
+
+2.Retrieve Hospital staff names in union with Doctor type without eliminating duplicates
+
+mysql> SELECT Firstname FROM Hospital_Staff
+    -> UNION ALL
+    -> SELECT DoctorType FROM Doctor;
++-------------+
+| Firstname   |
++-------------+
+| Rahul       |
+| Mehul       |
+| Saniya      |
+| Rakesh      |
+| Yash        |
+| Deepali     |
+| Simran      |
+| Anushka     |
+| Shruti      |
+| Aditi       |
+| Soumya      |
+| Khushi      |
+| Residential |
+| Consultant  |
+| Trainee     |
+| Residential |
+| Consultant  |
++-------------+
+17 rows in set (0.00 sec)
+
+3.List names who have same gender from Hospital Staff and Patients.
+
+mysql> SELECT Firstname,fname
+    -> FROM Hospital_Staff
+    -> INNER JOIN Patient
+    -> ON Hospital_staff.Gender=Patient.Gender;
++-----------+--------+
+| Firstname | fname  |
++-----------+--------+
+| Rahul     | Anant  |
+| Rahul     | Rohan  |
+| Rahul     | Varun  |
+| Rahul     | Dhruv  |
+| Rahul     | Kumpal |
+| Mehul     | Anant  |
+| Mehul     | Rohan  |
+| Mehul     | Varun  |
+| Mehul     | Dhruv  |
+| Mehul     | Kumpal |
+| Rakesh    | Anant  |
+| Rakesh    | Rohan  |
+| Rakesh    | Varun  |
+| Rakesh    | Dhruv  |
+| Rakesh    | Kumpal |
+| Yash      | Anant  |
+| Yash      | Rohan  |
+| Yash      | Varun  |
+| Yash      | Dhruv  |
+| Yash      | Kumpal |
++-----------+--------+
+20 rows in set (0.00 sec)
+
+4. List all first names of Hospital Staff whether they have same gender as Patients or not.
+
+mysql> SELECT Firstname,fname
+    -> FROM Hospital_Staff
+    -> LEFT JOIN Patient
+    -> ON Hospital_staff.Gender=Patient.Gender;
++-----------+--------+
+| Firstname | fname  |
++-----------+--------+
+| Rahul     | Anant  |
+| Mehul     | Anant  |
+| Rakesh    | Anant  |
+| Yash      | Anant  |
+| Rahul     | Rohan  |
+| Mehul     | Rohan  |
+| Rakesh    | Rohan  |
+| Yash      | Rohan  |
+| Rahul     | Varun  |
+| Mehul     | Varun  |
+| Rakesh    | Varun  |
+| Yash      | Varun  |
+| Rahul     | Dhruv  |
+| Mehul     | Dhruv  |
+| Rakesh    | Dhruv  |
+| Yash      | Dhruv  |
+| Rahul     | Kumpal |
+| Mehul     | Kumpal |
+| Rakesh    | Kumpal |
+| Yash      | Kumpal |
+| Saniya    | NULL   |
+| Deepali   | NULL   |
+| Simran    | NULL   |
+| Anushka   | NULL   |
+| Shruti    | NULL   |
+| Aditi     | NULL   |
+| Soumya    | NULL   |
+| Khushi    | NULL   |
++-----------+--------+
+28 rows in set (0.00 sec)
+
+5. List all first names of Patient whether they have same gender as Hospital staff or not.
+
+mysql> SELECT Firstname,fname
+    -> FROM Hospital_Staff
+    -> RIGHT JOIN Patient
+    -> ON Hospital_staff.Gender=Patient.Gender;
++-----------+--------+
+| Firstname | fname  |
++-----------+--------+
+| Rahul     | Anant  |
+| Rahul     | Rohan  |
+| Rahul     | Varun  |
+| Rahul     | Dhruv  |
+| Rahul     | Kumpal |
+| Mehul     | Anant  |
+| Mehul     | Rohan  |
+| Mehul     | Varun  |
+| Mehul     | Dhruv  |
+| Mehul     | Kumpal |
+| Rakesh    | Anant  |
+| Rakesh    | Rohan  |
+| Rakesh    | Varun  |
+| Rakesh    | Dhruv  |
+| Rakesh    | Kumpal |
+| Yash      | Anant  |
+| Yash      | Rohan  |
+| Yash      | Varun  |
+| Yash      | Dhruv  |
+| Yash      | Kumpal |
++-----------+--------+
+20 rows in set (0.00 sec)

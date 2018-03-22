@@ -1,0 +1,55 @@
+1. Make sure the salary entered is not NULL,if it is NULL, set salary to 5000
+
+mysql>  delimiter //
+mysql> create trigger salcheck
+    -> before insert on Hospital_staff
+    -> FOR EACH ROW
+    -> IF NEW.Salary is null
+    -> THEN
+    ->  SET NEW.Salary = 5000;
+    -> END IF;
+    ->  //
+Query OK, 0 rows affected (0.11 sec)
+	
+2. Backing up every entry made in the Hospital_staff table as it is made
+
+mysql>  delimiter //
+mysql> create trigger sal_bkp
+    -> after insert on Hospital_staff
+    -> FOR EACH ROW
+    -> insert into sal1_bkp(Firstname,Salary,Gender) values
+    -> (NEW.Firstname, new.Salary,new.Gender);
+    ->   //
+Query OK, 0 rows affected (0.14 sec)
+
+3. Update the new staff id as 01 if it is Null.
+
+mysql>  delimiter //
+mysql> create trigger staffidentity
+    -> before update on Hospital_staff
+    -> for each row
+    -> if new.StaffID is null then
+    -> set new.StaffID= 01;
+    -> end if;
+    -> //
+Query OK, 0 rows affected (0.11 sec)
+
+4.Check that Staff id is not null, then update total salary including the new salary in it.
+
+mysql> delimiter //
+mysql> create trigger total_sal1
+    -> after insert on Hospital_staff
+    -> for each row
+    -> if new.StaffID is not null then
+    -> update Hospital_staff
+    -> set total_sal=total_sal+new.Salary
+    -> where StaffID=new.StaffID;
+    -> end if;
+    -> //
+Query OK, 0 rows affected (0.41 sec)
+
+5.Drop the trigger.
+
+mysql> drop trigger total_sal1;
+Query OK, 0 rows affected (0.09 sec)
+	

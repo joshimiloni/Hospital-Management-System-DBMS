@@ -1,0 +1,255 @@
+1.Retrieve all attribute values from Patient
+
+mysql> select * from Patient;
++-----+--------+-------+---------+--------+------------+-----------------+---------------+------+
+| pID | fname  | lname | Address | Gender | DOB        | Date_discharged | Date_admitted | sID  |
++-----+--------+-------+---------+--------+------------+-----------------+---------------+------+
+|   1 | Anant  | Joshi | Mumbai  | M      | 1990-10-12 | 2017-01-12      | 2017-01-22    | NULL |
+|   2 | Rohan  | Joshi | Nasik   | M      | 1995-06-22 | 2017-02-12      | 2017-02-16    | NULL |
+|   3 | Varun  | Shah  | Thane   | M      | 1990-10-27 | 2017-01-07      | 2017-01-25    | NULL |
+|   4 | Dhruv  | Vora  | Mumbai  | M      | 1997-05-14 | 2017-02-01      | 2017-02-07    | NULL |
+|   5 | Kumpal | Bhatt | Mumbai  | M      | 2002-07-17 | 2017-03-15      | 2017-03-17    | NULL |
++-----+--------+-------+---------+--------+------------+-----------------+---------------+------+
+5 rows in set (0.00 sec)
+
+2.Retrieve the cross product of Patient and Room.
+
+mysql> select *
+    -> from Patient, Room;
++-----+--------+-------+---------+--------+------------+-----------------+---------------+------+--------+--------------+------+
+| pID | fname  | lname | Address | Gender | DOB        | Date_discharged | Date_admitted | sID  | RoomNo | Room_type    | PId  |
++-----+--------+-------+---------+--------+------------+-----------------+---------------+------+--------+--------------+------+
+|   1 | Anant  | Joshi | Mumbai  | M      | 1990-10-12 | 2017-01-12      | 2017-01-22    | NULL |     12 | General Ward |    1 |
+|   2 | Rohan  | Joshi | Nasik   | M      | 1995-06-22 | 2017-02-12      | 2017-02-16    | NULL |     12 | General Ward |    1 |
+|   3 | Varun  | Shah  | Thane   | M      | 1990-10-27 | 2017-01-07      | 2017-01-25    | NULL |     12 | General Ward |    1 |
+|   4 | Dhruv  | Vora  | Mumbai  | M      | 1997-05-14 | 2017-02-01      | 2017-02-07    | NULL |     12 | General Ward |    1 |
+|   5 | Kumpal | Bhatt | Mumbai  | M      | 2002-07-17 | 2017-03-15      | 2017-03-17    | NULL |     12 | General Ward |    1 |
+|   1 | Anant  | Joshi | Mumbai  | M      | 1990-10-12 | 2017-01-12      | 2017-01-22    | NULL |     13 | ICU          |    2 |
+|   2 | Rohan  | Joshi | Nasik   | M      | 1995-06-22 | 2017-02-12      | 2017-02-16    | NULL |     13 | ICU          |    2 |
+|   3 | Varun  | Shah  | Thane   | M      | 1990-10-27 | 2017-01-07      | 2017-01-25    | NULL |     13 | ICU          |    2 |
+|   4 | Dhruv  | Vora  | Mumbai  | M      | 1997-05-14 | 2017-02-01      | 2017-02-07    | NULL |     13 | ICU          |    2 |
+|   5 | Kumpal | Bhatt | Mumbai  | M      | 2002-07-17 | 2017-03-15      | 2017-03-17    | NULL |     13 | ICU          |    2 |
+|   1 | Anant  | Joshi | Mumbai  | M      | 1990-10-12 | 2017-01-12      | 2017-01-22    | NULL |     14 | ICU          |    3 |
+|   2 | Rohan  | Joshi | Nasik   | M      | 1995-06-22 | 2017-02-12      | 2017-02-16    | NULL |     14 | ICU          |    3 |
+|   3 | Varun  | Shah  | Thane   | M      | 1990-10-27 | 2017-01-07      | 2017-01-25    | NULL |     14 | ICU          |    3 |
+|   4 | Dhruv  | Vora  | Mumbai  | M      | 1997-05-14 | 2017-02-01      | 2017-02-07    | NULL |     14 | ICU          |    3 |
+|   5 | Kumpal | Bhatt | Mumbai  | M      | 2002-07-17 | 2017-03-15      | 2017-03-17    | NULL |     14 | ICU          |    3 |
+|   1 | Anant  | Joshi | Mumbai  | M      | 1990-10-12 | 2017-01-12      | 2017-01-22    | NULL |     15 | General Ward |    4 |
+|   2 | Rohan  | Joshi | Nasik   | M      | 1995-06-22 | 2017-02-12      | 2017-02-16    | NULL |     15 | General Ward |    4 |
+|   3 | Varun  | Shah  | Thane   | M      | 1990-10-27 | 2017-01-07      | 2017-01-25    | NULL |     15 | General Ward |    4 |
+|   4 | Dhruv  | Vora  | Mumbai  | M      | 1997-05-14 | 2017-02-01      | 2017-02-07    | NULL |     15 | General Ward |    4 |
+|   5 | Kumpal | Bhatt | Mumbai  | M      | 2002-07-17 | 2017-03-15      | 2017-03-17    | NULL |     15 | General Ward |    4 |
+|   1 | Anant  | Joshi | Mumbai  | M      | 1990-10-12 | 2017-01-12      | 2017-01-22    | NULL |     16 | General ward |    5 |
+|   2 | Rohan  | Joshi | Nasik   | M      | 1995-06-22 | 2017-02-12      | 2017-02-16    | NULL |     16 | General ward |    5 |
+|   3 | Varun  | Shah  | Thane   | M      | 1990-10-27 | 2017-01-07      | 2017-01-25    | NULL |     16 | General ward |    5 |
+|   4 | Dhruv  | Vora  | Mumbai  | M      | 1997-05-14 | 2017-02-01      | 2017-02-07    | NULL |     16 | General ward |    5 |
+|   5 | Kumpal | Bhatt | Mumbai  | M      | 2002-07-17 | 2017-03-15      | 2017-03-17    | NULL |     16 | General ward |    5 |
++-----+--------+-------+---------+--------+------------+-----------------+---------------+------+--------+--------------+------+
+25 rows in set (0.03 sec)
+
+3.Retrieve  Test id of all Patients who have Patient id no.2
+
+mysql> select TestID
+    -> from Test
+    -> where Patient_id=2;
++--------+
+| TestID |
++--------+
+|     13 |
++--------+
+1 row in set (0.03 sec)
+
+4.Retrieve First name and phone numbers of all Hospital staff who have gender male. 
+
+mysql> select Firstname,Phone_number
+    -> from Hospital_staff, Contact
+    -> where Gender='M' and Contact.StaffID=Hospital_staff.StaffID;
++-----------+--------------+
+| Firstname | Phone_number |
++-----------+--------------+
+| Rahul     |   8744565787 |
+| Mehul     |   9867565657 |
+| Rakesh    |   9886546034 |
+| Yash      |   6847679893 |
++-----------+--------------+
+4 rows in set (0.02 sec)
+
+5.Retrieve distinct addresses from Patient. 
+
+mysql> select distinct Address from Patient;
++---------+
+| Address |
++---------+
+| Mumbai  |
+| Nasik   |
+| Thane   |
++---------+
+3 rows in set (0.02 sec)
+
+6.Retrieve all addresses from Patient.
+
+mysql> select all Address from Patient;
++---------+
+| Address |
++---------+
+| Mumbai  |
+| Nasik   |
+| Thane   |
+| Mumbai  |
+| Mumbai  |
++---------+
+5 rows in set (0.00 sec)
+
+7.Retrieve all Patient names whose address is in Mumbai.
+
+mysql> select fname
+    -> from Patient
+    -> where Address like '%Mum%';
++--------+
+| fname  |
++--------+
+| Anant  |
+| Dhruv  |
+| Kumpal |
++--------+
+3 rows in set (0.00 sec)
+
+8.Retrieve all Hospital staff names whose phone number starts with 98.
+
+mysql> select Firstname
+    -> from Hospital_staff,Contact
+    -> where Phone_number like '98________' and Hospital_staff.StaffID=Contact.StaffID ;
++-----------+
+| Firstname |
++-----------+
+| Simran    |
+| Mehul     |
+| Rakesh    |
++-----------+
+3 rows in set (0.00 sec)
+
+9.Retrieve all TestID as Tid for all Paients with Patient id 3.
+
+mysql> select TestID as Tid
+    -> from Test
+    -> where Patient_id=3;
++-----+
+| Tid |
++-----+
+|  14 |
++-----+
+1 row in set (0.00 sec)
+
+10.Retrieve all Hospital staff who have gender F AND whose salary is between 20000 and 30000
+
+mysql> select *
+    -> from Hospital_staff
+    -> where (salary between 20000 and 30000) and Gender='F';
++---------+-----------+----------+---------------+--------+--------+
+| StaffID | Firstname | Lastname | Qualification | Gender | Salary |
++---------+-----------+----------+---------------+--------+--------+
+|       3 | Saniya    | Shah     | MBBS          | F      |  30000 |
+|       6 | Deepali   | Boda     | BSN           | F      |  25000 |
+|       7 | Simran    | Shah     | ADN           | F      |  23500 |
+|       8 | Anushka   | Gangwal  | BSN           | F      |  25000 |
+|       9 | Shruti    | Bhat     | DIPLOMA       | F      |  20000 |
+|      10 | Aditi     | Mewada   | ADN           | F      |  23500 |
++---------+-----------+----------+---------------+--------+--------+
+6 rows in set (0.02 sec)
+
+11.Retrieve staff id, name and phone number of all Hospital staff 
+who have qualification MBBS ordered alphabetically in descending order by first name.
+
+mysql> select Hospital_staff.StaffID, Phone_number,Firstname
+    -> from Hospital_staff,Contact
+    -> where Qualification='MBBS' and Hospital_staff.StaffID=Contact.StaffID
+    -> order by Firstname desc;
++---------+--------------+-----------+
+| StaffID | Phone_number | Firstname |
++---------+--------------+-----------+
+|       5 |   6847679893 | Yash      |
+|       3 |   9020288886 | Saniya    |
+|       4 |   9886546034 | Rakesh    |
+|       1 |   8744565787 | Rahul     |
+|       2 |   9867565657 | Mehul     |
++---------+--------------+-----------+
+5 rows in set (0.02 sec)
+
+12.Retrieve names of all Hospital Staff who do not get salary.
+
+mysql> select Firstname
+    -> from Hospital_staff
+    -> where salary is null;
+Empty set (0.00 sec)
+
+13.Retrieve maximum salary offered to Hospital Staff
+mysql> select max(salary)
+    -> from Hospital_staff;
++-------------+
+| max(salary) |
++-------------+
+|       45000 |
++-------------+
+1 row in set (0.00 sec)
+
+14.Retrieve maximum salary offered to Hospital Staff
+mysql> select min(salary)
+    -> from Hospital_staff;
++-------------+
+| min(salary) |
++-------------+
+|       15000 |
++-------------+
+1 row in set (0.00 sec)
+
+15.Retrieve gender wise average salary of employee.
+
+mysql> select avg(salary)
+    -> from Hospital_staff
+    -> group by Gender;
++-------------+
+| avg(salary) |
++-------------+
+|     22187.5 |
+|       35000 |
++-------------+
+2 rows in set (0.02 sec)
+
+16.Retrieve total number of Patients.
+
+mysql> select count(*)
+    -> from Patient;
++----------+
+| count(*) |
++----------+
+|        5 |
++----------+
+1 row in set (0.00 sec)
+
+17.Retrieve total salary given to Hospital staff.
+
+mysql> select sum(salary)
+    -> from Hospital_staff;
++-------------+
+| sum(salary) |
++-------------+
+|      317500 |
++-------------+
+1 row in set (0.00 sec)
+
+18.Retrieve First name, phone number and average salary for all Hospital Staff having average salary greater than 25000
+
+mysql> select Firstname,Phone_number, avg(salary)
+    -> from Hospital_staff, Contact
+    -> where Hospital_staff.StaffID=Contact.StaffID
+    -> group by Contact.StaffID
+    -> having avg(salary)>25000;
++-----------+--------------+-------------+
+| Firstname | Phone_number | avg(salary) |
++-----------+--------------+-------------+
+| Rahul     |   8744565787 |       35000 |
+| Mehul     |   9867565657 |       45000 |
+| Saniya    |   9020288886 |       30000 |
+| Yash      |   6847679893 |       35000 |
++-----------+--------------+-------------+
+4 rows in set (0.00 sec)

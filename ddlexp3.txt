@@ -1,0 +1,621 @@
+
+mysql> create database hospital;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> SHOW databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| hospital           |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> USE hospital;
+Database changed
+mysql>
+mysql>     create table Hospital_staff
+    ->     (StaffID int(10) primary key,
+    ->     Firstname varchar(10),
+    ->     Lastname varchar(10),
+    ->     Qualification varchar(10),
+    ->     Gender char(1),
+    ->     Salary float(10)
+    ->     );
+Query OK, 0 rows affected (0.53 sec)
+
+mysql>
+mysql> describe Hospital_staff;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| StaffID       | int(10)     | NO   | PRI | NULL    |       |
+| Firstname     | varchar(10) | YES  |     | NULL    |       |
+| Lastname      | varchar(10) | YES  |     | NULL    |       |
+| Qualification | varchar(10) | YES  |     | NULL    |       |
+| Gender        | char(1)     | YES  |     | NULL    |       |
+| Salary        | float       | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql>
+mysql>      create table Patient
+    ->      (pID int(10) primary key,
+    ->      fname varchar(10),
+    ->      lname varchar(10),
+    ->      Address varchar(10),
+    ->      Gender char(1),
+    ->      DOB date,
+    ->      Date_discharged date,
+    ->      Date_admitted date
+    ->      );
+Query OK, 0 rows affected (0.34 sec)
+
+mysql>
+mysql> describe Patient;
++-----------------+-------------+------+-----+---------+-------+
+| Field           | Type        | Null | Key | Default | Extra |
++-----------------+-------------+------+-----+---------+-------+
+| pID             | int(10)     | NO   | PRI | NULL    |       |
+| fname           | varchar(10) | YES  |     | NULL    |       |
+| lname           | varchar(10) | YES  |     | NULL    |       |
+| Address         | varchar(10) | YES  |     | NULL    |       |
+| Gender          | char(1)     | YES  |     | NULL    |       |
+| DOB             | date        | YES  |     | NULL    |       |
+| Date_discharged | date        | YES  |     | NULL    |       |
+| Date_admitted   | date        | YES  |     | NULL    |       |
++-----------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql>
+mysql> create table Records
+    -> (
+    ->  RecordNo int(10) primary key,
+    ->  Doctors_info varchar(30),
+    ->  Patients_info varchar(30),
+    ->  Appointment_date date
+    ->  );
+                                                                      Query OK, 0 rows affected (0.36 sec)
+
+mysql>
+mysql> describe Records;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| RecordNo         | int(10)     | NO   | PRI | NULL    |       |
+| Doctors_info     | varchar(30) | YES  |     | NULL    |       |
+| Patients_info    | varchar(30) | YES  |     | NULL    |       |
+| Appointment_date | date        | YES  |     | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql>
+mysql> create table Pharmacy
+    -> (
+    ->  MedicineCode varchar(10) primary key,
+    ->  Price float(10)
+    -> );
+Query OK, 0 rows affected (0.33 sec)
+
+mysql>
+mysql> describe Pharmacy;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| MedicineCode | varchar(10) | NO   | PRI | NULL    |       |
+| Price        | float       | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+
+mysql>
+mysql> create table Test
+    -> (
+    ->  TestID int(10) primary key,
+    ->  Test_name varchar(20),
+    ->  Test_date date
+    -> );
+Query OK, 0 rows affected (0.33 sec)
+
+mysql>
+mysql> describe Test;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| TestID    | int(10)     | NO   | PRI | NULL    |       |
+| Test_name | varchar(20) | YES  |     | NULL    |       |
+| Test_date | date        | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql>
+mysql> create table Rooms
+    -> (
+    ->  RoomNo int(5) primary key,
+    ->  Room_type varchar(20)
+    -> );
+Query OK, 0 rows affected (0.55 sec)
+
+mysql>
+mysql> describe Rooms;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| RoomNo    | int(5)      | NO   | PRI | NULL    |       |
+| Room_type | varchar(20) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql>
+mysql> create table Receptionist
+    -> (
+    ->  StaffID int(10) primary key,
+    ->  TypingSpeed int(3)
+    -> );
+Query OK, 0 rows affected (0.38 sec)
+
+mysql>
+mysql> describe Receptionist;
++-------------+---------+------+-----+---------+-------+
+| Field       | Type    | Null | Key | Default | Extra |
++-------------+---------+------+-----+---------+-------+
+| StaffID     | int(10) | NO   | PRI | NULL    |       |
+| TypingSpeed | int(3)  | YES  |     | NULL    |       |
++-------------+---------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql>
+mysql> create table Nurse
+    -> (
+    ->  StaffID int(10) primary key,
+    ->  Score int(5)
+    -> );
+Query OK, 0 rows affected (0.38 sec)
+
+mysql>
+mysql> describe Nurse;
++---------+---------+------+-----+---------+-------+
+| Field   | Type    | Null | Key | Default | Extra |
++---------+---------+------+-----+---------+-------+
+| StaffID | int(10) | NO   | PRI | NULL    |       |
+| Score   | int(5)  | YES  |     | NULL    |       |
++---------+---------+------+-----+---------+-------+
+2 rows in set (0.02 sec)
+
+mysql>
+mysql> create table Doctor
+    -> (
+    ->  StaffID int(10) primary key,
+    ->  DoctorType varchar(20),
+    ->  Specialisation varchar(20)
+    -> );
+Query OK, 0 rows affected (0.39 sec)
+
+mysql>
+mysql> describe Doctor;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| StaffID        | int(10)     | NO   | PRI | NULL    |       |
+| DoctorType     | varchar(20) | YES  |     | NULL    |       |
+| Specialisation | varchar(20) | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> Alter table Rooms
+    -> Rename Room;
+Query OK, 0 rows affected (0.19 sec)
+
+mysql>
+mysql> describe Room;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| RoomNo    | int(5)      | NO   | PRI | NULL    |       |
+| Room_type | varchar(20) | YES  |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql>
+mysql> Alter table Test
+    -> Add(Patient_id int(10));
+Query OK, 0 rows affected (0.97 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> describe Test;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| TestID     | int(10)     | NO   | PRI | NULL    |       |
+| Test_name  | varchar(20) | YES  |     | NULL    |       |
+| Test_date  | date        | YES  |     | NULL    |       |
+| Patient_id | int(10)     | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql>
+mysql> Alter table Test
+    -> Add constraint patfk
+    -> foreign key(Patient_id) references Patient(pID)
+    -> on delete set null
+    -> on update cascade;
+Query OK, 0 rows affected (0.94 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> describe Test;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| TestID     | int(10)     | NO   | PRI | NULL    |       |
+| Test_name  | varchar(20) | YES  |     | NULL    |       |
+| Test_date  | date        | YES  |     | NULL    |       |
+| Patient_id | int(10)     | YES  | MUL | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+mysql>
+mysql> Alter table Pharmacy
+    -> Add(PatID int(10));
+Query OK, 0 rows affected (0.81 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> Alter table Pharmacy
+    -> Add constraint patientfk
+    -> foreign key(PatID) references Patient(pID)
+    -> on delete set null
+    -> on update cascade;
+Query OK, 0 rows affected (0.98 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> describe Pharmacy;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| MedicineCode | varchar(10) | NO   | PRI | NULL    |       |
+| Price        | float       | YES  |     | NULL    |       |
+| PatID        | int(10)     | YES  | MUL | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
+mysql>
+mysql> Alter table Room
+    -> add(PId int(10));
+Query OK, 0 rows affected (0.77 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> Alter table Room
+    -> Add constraint pidfk
+    -> foreign key(PId) references Patient(pID)
+    -> on delete set null
+    -> on update cascade;
+Query OK, 0 rows affected (0.92 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> describe room;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| RoomNo    | int(5)      | NO   | PRI | NULL    |       |
+| Room_type | varchar(20) | YES  |     | NULL    |       |
+| PId       | int(10)     | YES  | MUL | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql>
+mysql> Alter table Records
+    -> add(Staff_identity int(10));
+Query OK, 0 rows affected (0.66 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> Alter table Records
+    -> add constraint staffk
+    -> foreign key(Staff_identity) references Receptionist(StaffID)
+    -> on delete set null
+    -> on update cascade;
+Query OK, 0 rows affected (0.83 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> describe Records;
++------------------+-------------+------+-----+---------+-------+
+| Field            | Type        | Null | Key | Default | Extra |
++------------------+-------------+------+-----+---------+-------+
+| RecordNo         | int(10)     | NO   | PRI | NULL    |       |
+| Doctors_info     | varchar(30) | YES  |     | NULL    |       |
+| Patients_info    | varchar(30) | YES  |     | NULL    |       |
+| Appointment_date | date        | YES  |     | NULL    |       |
+| Staff_identity   | int(10)     | YES  | MUL | NULL    |       |
++------------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql>
+mysql> Alter table Receptionist
+    -> add constraint staffk1
+    -> foreign key(StaffID) references Hospital_staff(StaffID);
+Query OK, 0 rows affected (0.86 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> describe Receptionist;
++-------------+---------+------+-----+---------+-------+
+| Field       | Type    | Null | Key | Default | Extra |
++-------------+---------+------+-----+---------+-------+
+| StaffID     | int(10) | NO   | PRI | NULL    |       |
+| TypingSpeed | int(3)  | YES  |     | NULL    |       |
++-------------+---------+------+-----+---------+-------+
+2 rows in set (0.25 sec)
+
+mysql> Alter table Nurse
+    -> add(Roomnumber int(5));
+Query OK, 0 rows affected (0.69 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> Alter table Nurse
+    -> add constraint roomfk
+    -> foreign key(Roomnumber) references Room(RoomNo)
+    -> on delete set null
+    -> on update cascade;
+Query OK, 0 rows affected (0.95 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> describe Nurse;
++------------+---------+------+-----+---------+-------+
+| Field      | Type    | Null | Key | Default | Extra |
++------------+---------+------+-----+---------+-------+
+| StaffID    | int(10) | NO   | PRI | NULL    |       |
+| Score      | int(5)  | YES  |     | NULL    |       |
+| Roomnumber | int(5)  | YES  | MUL | NULL    |       |
++------------+---------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
+mysql>
+mysql> Alter table Doctor
+    -> add constraint staffididid
+    -> foreign key(StaffID) references Hospital_Staff(StaffID);
+Query OK, 0 rows affected (1.14 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> Describe Doctor;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| StaffID        | int(10)     | NO   | PRI | NULL    |       |
+| DoctorType     | varchar(20) | YES  |     | NULL    |       |
+| Specialisation | varchar(20) | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql>
+mysql> Alter table Patient
+    -> add(sID int(10));
+Query OK, 0 rows affected (0.72 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> describe Patient;
++-----------------+-------------+------+-----+---------+-------+
+| Field           | Type        | Null | Key | Default | Extra |
++-----------------+-------------+------+-----+---------+-------+
+| pID             | int(10)     | NO   | PRI | NULL    |       |
+| fname           | varchar(10) | YES  |     | NULL    |       |
+| lname           | varchar(10) | YES  |     | NULL    |       |
+| Address         | varchar(10) | YES  |     | NULL    |       |
+| Gender          | char(1)     | YES  |     | NULL    |       |
+| DOB             | date        | YES  |     | NULL    |       |
+| Date_discharged | date        | YES  |     | NULL    |       |
+| Date_admitted   | date        | YES  |     | NULL    |       |
+| sID             | int(10)     | YES  |     | NULL    |       |
++-----------------+-------------+------+-----+---------+-------+
+9 rows in set (0.00 sec)
+
+mysql>
+mysql> Alter table Patient
+    -> add constraint sidid
+    -> foreign key(sID) references Doctor(StaffID)
+    -> on delete set null
+    -> on update cascade;
+Query OK, 0 rows affected (0.97 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> Describe Patient;
++-----------------+-------------+------+-----+---------+-------+
+| Field           | Type        | Null | Key | Default | Extra |
++-----------------+-------------+------+-----+---------+-------+
+| pID             | int(10)     | NO   | PRI | NULL    |       |
+| fname           | varchar(10) | YES  |     | NULL    |       |
+| lname           | varchar(10) | YES  |     | NULL    |       |
+| Address         | varchar(10) | YES  |     | NULL    |       |
+| Gender          | char(1)     | YES  |     | NULL    |       |
+| DOB             | date        | YES  |     | NULL    |       |
+| Date_discharged | date        | YES  |     | NULL    |       |
+| Date_admitted   | date        | YES  |     | NULL    |       |
+| sID             | int(10)     | YES  | MUL | NULL    |       |
++-----------------+-------------+------+-----+---------+-------+
+9 rows in set (0.02 sec)
+
+mysql>
+mysql> Alter table Doctor
+    -> add constraint staffididid
+    -> foreign key(StaffID) references Hospital_Staff(StaffID);
+ERROR 1022 (23000): Can't write; duplicate key in table '#sql-9f4_b'
+mysql>
+mysql> Describe Doctor;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| StaffID        | int(10)     | NO   | PRI | NULL    |       |
+| DoctorType     | varchar(20) | YES  |     | NULL    |       |
+| Specialisation | varchar(20) | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+
+mysql>
+mysql> Create table Contact
+    -> (
+    -> StaffID int(10),
+    -> Phone_number bigint(10) unique,
+    -> primary key(StaffID,Phone_number),
+    -> foreign key(StaffID) references Hospital_Staff(StaffID)
+    -> on update cascade
+    -> on delete cascade);
+Query OK, 0 rows affected (0.38 sec)
+
+mysql>
+mysql>
+mysql> Create table Contact_no
+    -> (
+    -> pID int(10),
+    -> Phone_no bigint(10) unique,
+    -> primary key(pID,Phone_no),
+    -> foreign key(pID) references Patient(pID)
+    -> on update cascade
+    -> on delete cascade);
+Query OK, 0 rows affected (0.31 sec)
+
+mysql>
+mysql> Create table Visits
+    -> (
+    -> StaffID int(10),
+    -> RoomNo int(5),
+    -> foreign key(StaffID) references Doctor(StaffID),
+    -> foreign key(RoomNo) references Room(RoomNo),
+    -> primary key(StaffID,RoomNo));
+Query OK, 0 rows affected (0.41 sec)
+
+mysql>
+mysql> describe Visits;
++---------+---------+------+-----+---------+-------+
+| Field   | Type    | Null | Key | Default | Extra |
++---------+---------+------+-----+---------+-------+
+| StaffID | int(10) | NO   | PRI | NULL    |       |
+| RoomNo  | int(5)  | NO   | PRI | NULL    |       |
++---------+---------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+
+mysql>
+mysql> create table dummy
+    -> (
+    -> x int(2),
+    -> y varchar(5),
+    -> z char(1)
+    -> );
+Query OK, 0 rows affected (0.36 sec)
+
+mysql> describe dummy;
++-------+------------+------+-----+---------+-------+
+| Field | Type       | Null | Key | Default | Extra |
++-------+------------+------+-----+---------+-------+
+| x     | int(2)     | YES  |     | NULL    |       |
+| y     | varchar(5) | YES  |     | NULL    |       |
+| z     | char(1)    | YES  |     | NULL    |       |
++-------+------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql>
+mysql> alter table dummy
+    -> add(v int(3));
+Query OK, 0 rows affected (0.73 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> describe dummy;
++-------+------------+------+-----+---------+-------+
+| Field | Type       | Null | Key | Default | Extra |
++-------+------------+------+-----+---------+-------+
+| x     | int(2)     | YES  |     | NULL    |       |
+| y     | varchar(5) | YES  |     | NULL    |       |
+| z     | char(1)    | YES  |     | NULL    |       |
+| v     | int(3)     | YES  |     | NULL    |       |
++-------+------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql>
+mysql> alter table dummy
+    -> modify v char(1);
+Query OK, 0 rows affected (0.84 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> describe dummy;
++-------+------------+------+-----+---------+-------+
+| Field | Type       | Null | Key | Default | Extra |
++-------+------------+------+-----+---------+-------+
+| x     | int(2)     | YES  |     | NULL    |       |
+| y     | varchar(5) | YES  |     | NULL    |       |
+| z     | char(1)    | YES  |     | NULL    |       |
+| v     | char(1)    | YES  |     | NULL    |       |
++-------+------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql>
+mysql> alter table dummy
+    -> rename dummy1;
+Query OK, 0 rows affected (0.11 sec)
+
+mysql>
+mysql> describe dummy1;
++-------+------------+------+-----+---------+-------+
+| Field | Type       | Null | Key | Default | Extra |
++-------+------------+------+-----+---------+-------+
+| x     | int(2)     | YES  |     | NULL    |       |
+| y     | varchar(5) | YES  |     | NULL    |       |
+| z     | char(1)    | YES  |     | NULL    |       |
+| v     | char(1)    | YES  |     | NULL    |       |
++-------+------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql>
+mysql> alter table dummy1
+    -> drop column v;
+Query OK, 0 rows affected (0.95 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> insert into dummy1(x,y,z)
+    -> values(1,'hello','f'),(2,'cakes','f'),(1,'short','m');
+Query OK, 3 rows affected (0.05 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> truncate table dummy1;
+Query OK, 0 rows affected (0.25 sec)
+
+mysql>
+mysql> select * from dummy1;
+Empty set (0.00 sec)
+
+mysql>
+mysql> show tables;
++--------------------+
+| Tables_in_hospital |
++--------------------+
+| contact            |
+| contact_no         |
+| doctor             |
+| dummy1             |
+| hospital_staff     |
+| nurse              |
+| patient            |
+| pharmacy           |
+| receptionist       |
+| records            |
+| room               |
+| test               |
+| visits             |
++--------------------+
+13 rows in set (0.02 sec)
