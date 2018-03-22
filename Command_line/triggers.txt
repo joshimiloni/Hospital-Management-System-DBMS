@@ -1,0 +1,30 @@
+delimiter //
+create trigger salcheck
+before insert on Hospital_staff
+FOR EACH ROW
+IF NEW.Salary is null
+THEN
+SET NEW.Salary = 5000;
+END IF;
+//
+
+delimiter //
+create trigger sal_bkp
+after insert on Hospital_staff
+FOR EACH ROW
+insert into sal1_bkp(Firstname,Salary,Gender) values
+(NEW.Firstname, new.Salary,new.Gender);
+//
+
+delimiter //
+create trigger total_sal1
+after insert on Hospital_staff
+for each row
+if new.StaffID is not null then
+update Hospital_staff
+set total_sal=total_sal+new.Salary
+where StaffID=new.StaffID;
+end if;
+//
+
+drop trigger total_sal1;

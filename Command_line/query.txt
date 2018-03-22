@@ -1,0 +1,67 @@
+select * from Patient;
+
+select * 
+from Patient, Room;
+
+select TestID
+from Test
+where Patient_id=2;
+
+select Firstname,Phone_number
+from Hospital_staff, Contact
+where Gender='M' and Contact.StaffID=Hospital_staff.StaffID;
+
+select distinct Address from Patient;
+
+select all Address from Patient;
+
+select fname
+from Patient
+where Address like '%Mum%';
+
+select Firstname
+from Hospital_staff,Contact
+where Phone_number like '98________' and Hospital_staff.StaffID=Contact.StaffID ;
+
+select TestID as Tid
+from Test
+where Patient_id=3;
+
+select * 
+from Hospital_staff
+where (salary between 20000 and 30000) and Gender='F';
+
+select Hospital_staff.StaffID, Phone_number,Firstname
+from Hospital_staff,Contact
+where Qualification='MBBS' and Hospital_staff.StaffID=Contact.StaffID
+order by Firstname desc;
+
+select Firstname
+from Hospital_staff
+where salary is null;
+
+select max(salary)
+from Hospital_staff;
+
+select min(salary)
+from Hospital_staff;
+
+select avg(salary)
+from Hospital_staff
+group by Gender;
+
+select count(*)
+from Patient;
+
+select sum(salary)
+from Hospital_staff;
+
+select Firstname,Phone_number, avg(salary)
+from Hospital_staff, Contact
+where Hospital_staff.StaffID=Contact.StaffID
+group by Contact.StaffID
+having avg(salary)>25000;
+
+
+
+

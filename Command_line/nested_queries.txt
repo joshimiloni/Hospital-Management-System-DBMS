@@ -1,0 +1,41 @@
+select Firstname
+from Hospital_staff
+where Salary>=all ( select Salary
+		    from Hospital_staff
+		    where Gender='M');
+
+select Firstname
+from Hospital_staff
+where Salary>=some ( select Salary
+    		     from Hospital_staff
+   		     where Gender='M');
+
+select Firstname
+from Hospital_staff
+where exists ( select *
+    	       from Doctor
+    	       where Doctor.StaffID=Hospital_staff.StaffID);
+
+select Firstname
+from Hospital_staff
+where not exists ( select *
+    		  from Doctor
+                  where Doctor.StaffID=Hospital_staff.StaffID);
+
+Select fname
+from Patient
+where pID IN ( select Patient_id
+    	       from Test
+    	       where TestID=12 AND Patient_id=pID);
+
+create table hospi_bkp
+    (StaffID int(10) primary key,
+    Firstname varchar(10),
+    Lastname varchar(10),
+    Qualification varchar(10),
+    Gender char(1),
+    Salary float(10)
+    );
+
+insert into hospi_bkp
+    select * from Hospital_staff;

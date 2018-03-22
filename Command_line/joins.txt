@@ -1,0 +1,28 @@
+SELECT Firstname FROM Hospital_Staff
+UNION
+SELECT DoctorType FROM Doctor;
+
+SELECT Firstname FROM Hospital_Staff
+UNION ALL
+SELECT DoctorType FROM Doctor;
+
+SELECT Firstname,fname
+FROM Hospital_Staff
+INNER JOIN Patient
+ON Hospital_staff.Gender=Patient.Gender;
+
+SELECT Firstname,fname
+FROM Hospital_Staff
+LEFT JOIN Patient
+ON Hospital_staff.Gender=Patient.Gender;
+
+SELECT Firstname,fname
+FROM Hospital_Staff
+RIGHT JOIN Patient
+ON Hospital_staff.Gender=Patient.Gender;
+
+
+
+
+
+

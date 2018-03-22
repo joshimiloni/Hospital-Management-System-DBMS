@@ -1,0 +1,94 @@
+SET SQL_SAFE_UPDATES=0;
+insert into Hospital_staff(StaffID,Firstname,Lastname,Qualification,Gender,Salary)
+values(1,'Rahul','Shah','MBBS','M',35000),
+(2,'Mehul','Boda','MBBS','M',45000),
+(3,'Saniya','Shah','MBBS','F',30000),
+(4,'Rakesh','Vora','MBBS','M',25000),
+(5,'Yash','Vora','MBBS','M',35000);
+
+insert into Hospital_staff(StaffID,Firstname,Lastname,Qualification,Gender,Salary)
+values(6,'Deepali','Boda','BSN','F',25000),
+(7,'Simran','Shah','ADN','F',23500),
+(8,'Anushka','Gangwal','BSN','F',25000),
+(9,'Shruti','Bhat','DIPLOMA','F',20000),
+(10,'Aditi','Mewada','ADN','F',23500);
+
+insert into Hospital_staff(StaffID,Firstname,Lastname,Qualification,Gender,Salary)
+values(11,'Shreya','Shah','BCOM','F',15000),
+(12,'Khushi','Joshi','BA','F',15500);
+
+insert into Contact(StaffID,Phone_number)
+values(1,8744565787),(2,9867565657),(3,9020288886),(4,9886546034),(5,6847679893),
+(6,9867356766),(7,9808276666),(8,8798428578),(9,7890635272),(10,9231445627),
+(11,8373832822),(12,7484832822);
+
+insert into Doctor(StaffID,DoctorType,Specialisation)
+values(1,'Residential','Pediatric'),(2,'Consultant','Orthodentist'),
+(3,'Trainee','Physiotherapy'),(4,'Residential','Orthodentist'),(5,'Consultant','Pediatric');
+
+insert into Receptionist(StaffID,TypingSpeed)
+values(1,50),
+(2,60);
+
+insert into Patient(pID,fname,lname,Address,Gender,DOB,Date_discharged,Date_admitted)
+values(1,'Anant','Joshi','Mumbai','M','1990-10-12','2017-01-12','2017-01-22'),
+(2,'Rohan','Joshi','Nasik','M','1995-06-22','2017-02-12','2017-02-16'),
+(3,'Varun','Shah','Thane','M','1990-10-27','2017-01-07','2017-01-25'),
+(4,'Dhruv','Vora','Mumbai','M','1997-5-14','2017-02-01','2017-02-07'),
+(5,'Kumpal','Bhatt','Mumbai','M','2002-07-17','2017-03-15','2017-03-17');
+
+insert into Contact_no(pID,Phone_no)
+values(1,9876468438),(2,9764748438),(3,9830863722),
+(4,9876489983),(5,9879479899);
+
+insert into Room(RoomNo,Room_type,PId)
+values(12,'General Ward',1),(13,'ICU',2),(14,'ICU',3),(15,'General Ward',4),(16,'General ward',5);
+
+insert into Nurse(StaffID,Score,Roomnumber)
+values(6,99,12),(7,98,13),(8,95,14),(9,99,15),(10,96,16);
+
+insert into Records(RecordNo,Doctors_info,Patients_info,Appointment_date)
+values(1,'Rahul Shah','Anant Joshi','2017-01-11'),
+(2,'Mehul Boda','Rohan Joshi','2017-01-12'),
+(3,'Saniya Shah','Varun Shah','2017-01-30'),
+(4,'Rakesh Vora','Dhruv Vora','2017-02-12'),
+(5,'Yash Vora','Kumpal Bhatt','2017-02-20');
+
+insert into Test(TestID,Test_name,Test_date,Patient_id)
+values(12,'Blood Test','2017-01-12',1),
+(13,'Maternity Test','2017-01-15',2),
+(14,'Sonography','2017-02-14',3),
+(15,'X-RAY','2017-02-16',4),
+(16,'ECG','2017-02-22',5);
+
+insert into Visits(StaffID,RoomNo)
+values(1,12),(2,13),(3,14),(4,15),(5,16);
+
+insert into Pharmacy(MedicineCode,Price,PatID)
+values('1A6W2',210.50,1),('1A6W5',100.65,2),('AYW22',160.44,3),('3VWR2',200.09,4),('1FFRT',300.10,5);
+
+select * from Hospital_Staff;
+
+update Hospital_Staff
+set Firstname='Soumya'
+where StaffID=11;
+
+select * from Hospital_Staff;
+
+delete from Hospital_Staff
+where StaffID=6;
+
+select * from Hospital_Staff;
+
+
+
+
+
+
+
+
+
+
+
+
+

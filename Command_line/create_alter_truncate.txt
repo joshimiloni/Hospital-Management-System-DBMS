@@ -1,0 +1,246 @@
+create database hospital;
+SHOW databases;
+USE hospital;
+
+    create table Hospital_staff
+    (StaffID int(10) primary key,
+    Firstname varchar(10),
+    Lastname varchar(10),
+    Qualification varchar(10),
+    Gender char(1),
+    Salary float(10)
+    );
+
+describe Hospital_staff;
+
+     create table Patient
+     (pID int(10) primary key,
+     fname varchar(10),
+     lname varchar(10),
+     Address varchar(10),
+     Gender char(1),
+     DOB date,
+     Date_discharged date,
+     Date_admitted date
+     ); 
+
+describe Patient;
+
+create table Records
+(
+ RecordNo int(10) primary key,
+ Doctors_info varchar(30),
+ Patients_info varchar(30),
+ Appointment_date date
+ );
+
+describe Records;
+
+create table Pharmacy
+(
+ MedicineCode varchar(10) primary key,
+ Price float(10)
+); 
+
+describe Pharmacy;
+
+create table Test
+(
+ TestID int(10) primary key,
+ Test_name varchar(20),
+ Test_date date
+);
+
+describe Test;
+
+create table Rooms
+(
+ RoomNo int(5) primary key,
+ Room_type varchar(20)
+);
+
+describe Rooms;
+
+create table Receptionist 
+(
+ StaffID int(10) primary key,
+ TypingSpeed int(3)
+);
+
+describe Receptionist;
+
+create table Nurse
+(
+ StaffID int(10) primary key,
+ Score int(5)
+);
+
+describe Nurse;
+
+create table Doctor
+(
+ StaffID int(10) primary key,
+ DoctorType varchar(20),
+ Specialisation varchar(20)
+);
+
+describe Doctor;
+
+Alter table Rooms
+Rename Room;
+
+describe Room;
+
+show tables;
+
+Alter table Test
+Add(Patient_id int(10));
+
+describe Test;
+
+Alter table Test
+Add constraint patfk
+foreign key(Patient_id) references Patient(pID)
+on delete set null
+on update cascade;
+
+describe Test;
+
+Alter table Pharmacy
+Add(PatID int(10));
+
+Alter table Pharmacy
+Add constraint patientfk
+foreign key(PatID) references Patient(pID)
+on delete set null
+on update cascade;
+
+describe Pharmacy;
+
+Alter table Room
+add(PId int(10));
+
+Alter table Room
+Add constraint pidfk
+foreign key(PId) references Patient(pID)
+on delete set null
+on update cascade;
+
+describe room;
+
+Alter table Records
+add(Staff_identity int(10));
+
+Alter table Records
+add constraint staffk
+foreign key(Staff_identity) references Receptionist(StaffID)
+on delete set null
+on update cascade;
+
+describe Records;
+
+Alter table Receptionist
+add constraint staffk1
+foreign key(StaffID) references Hospital_staff(StaffID);
+
+describe Receptionist;
+
+Alter table Nurse
+add(Roomnumber int(5));
+
+Alter table Nurse
+add constraint roomfk
+foreign key(Roomnumber) references Room(RoomNo)
+on delete set null
+on update cascade;
+
+describe Nurse;
+
+Alter table Doctor
+add constraint staffididid
+foreign key(StaffID) references Hospital_Staff(StaffID);
+
+Describe Doctor;
+
+Alter table Patient
+add(sID int(10));
+
+describe Patient;
+
+Alter table Patient
+add constraint sidid
+foreign key(sID) references Doctor(StaffID)
+on delete set null
+on update cascade;
+
+Describe Patient;
+
+Alter table Doctor
+add constraint staffididid
+foreign key(StaffID) references Hospital_Staff(StaffID);
+
+Describe Doctor;
+
+Create table Contact
+(
+StaffID int(10),
+Phone_number bigint(10) unique,
+primary key(StaffID,Phone_number),
+foreign key(StaffID) references Hospital_Staff(StaffID)
+on update cascade
+on delete cascade);
+
+
+Create table Contact_no
+(
+pID int(10),
+Phone_no bigint(10) unique,
+primary key(pID,Phone_no),
+foreign key(pID) references Patient(pID)
+on update cascade
+on delete cascade);
+
+Create table Visits
+(
+StaffID int(10),
+RoomNo int(5),
+foreign key(StaffID) references Doctor(StaffID),
+foreign key(RoomNo) references Room(RoomNo),
+primary key(StaffID,RoomNo));
+
+describe Visits;
+
+create table dummy
+(
+x int(2),
+y varchar(5),
+z char(1)
+);
+describe dummy;
+
+alter table dummy
+add(v int(3));
+
+describe dummy;
+
+alter table dummy
+modify v char(1);
+
+describe dummy;
+
+alter table dummy
+rename dummy1;
+
+describe dummy1;
+
+alter table dummy1
+drop column v;
+
+insert into dummy1(x,y,z)
+values(1,'hello','f'),(2,'cakes','f'),(1,'short','m');
+
+truncate table dummy1;
+
+select * from dummy1;
+
+show tables;
